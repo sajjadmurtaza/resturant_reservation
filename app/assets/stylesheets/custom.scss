@@ -1,0 +1,58 @@
+#custom{
+  .form-group{
+    .form-control{
+      color: #000000;
+      height: 30px;
+     width: 165px;
+      background: #ffffff;
+    }
+    .form-button{
+      height: 30px;
+      width: 100px;
+    }
+
+  }
+}
+
+#custom{
+  .form-group{
+    .month{ 
+      width: 120px !important;
+    }
+  }
+}
+#custom {
+margin: 0 auto;
+width: 51%;
+
+}
+.badge{
+  margin: 0 0 0 5px;
+  background: #F89406;
+}
+table{
+  max-width: 98% !important;
+  margin-left: 1%;
+  tbody{
+    color: #000000;
+  }
+}
+#menu_links{
+  text-align: center;
+}
+#gridSystemModalLabel{
+  color: #B84948;
+}
+.pagination{
+  a{
+    color: #000000;
+  }
+  float: right;
+  margin: 0 15px 0 0;
+}
+.form-control[disabled]{
+  background-color: #494849;
+}
+.radio{
+  display: none;
+}

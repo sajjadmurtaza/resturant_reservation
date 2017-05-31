@@ -1,0 +1,128 @@
+- if @reservation.confirmed == false && @reservation.active == false
+  .container.min-height
+    .row
+      .col-sm-4.col-sm-offset-4
+        section.reciept.listing
+          header
+            .media
+              .media-left
+                = image_tag 'list_logo.png'
+              .media-body
+                = link_to 'back', restaurants_path, class: 'pull-right btn smallbtn'
+          .loader.text-center      
+            p Your reservation at "#{@reservation.restaurant.name}" has been cancelled. Thank you for using
+              Seated App.
+- elsif (current_user and @reservation.confirmed) || @reservation.active
+  .container.min-height
+    .row
+      .col-sm-4.col-sm-offset-4
+        section.reciept.listing
+          header
+            .media
+              .media-left
+                = image_tag 'list_logo.png'
+              .media-body
+                = link_to 'back', restaurants_path, class: 'pull-right btn smallbtn'
+          article.congo
+            ul
+              li
+                .media
+                  .media-right.pull-right
+                    = image_tag @reservation.restaurant.image_url(:thumb)
+                  .media-body
+                    h4.media-heading CONGRATULATIONS
+                    p = "#{@reservation.active ? 'Your Table is Booked' : 'Your Table is Confirmed'}"
+          section.order_info
+            
+            ul
+              li
+                | Name:
+                strong.pull-right
+                  = @reservation.user.name.present? ? @reservation.user.name : 'Not Mention'
+              li
+                | Size:
+                strong.pull-right
+                  = "#{@reservation.number_of_people} Persons"
+              li
+                | Wait Time:
+                strong.pull-right
+                  = @reservation.wait_time
+              li
+                | Please arrive at :
+                strong.pull-right
+                  | 5:30 pm
+            
+
+
+
+- elsif current_restaurant
+  .container.min-height
+    .row
+      .col-sm-4.col-sm-offset-4
+        section.reciept.listing
+          header
+            .media
+              .media-left
+                a href="#"
+                  = image_tag 'list_logo.png'
+              .media-body
+                = link_to 'back', reservations_path, class: 'pull-right btn smallbtn'
+          article.new
+            h4.text-center
+              = @reservation.party_name.upcase
+          section.order_info
+            ul
+              /li
+                | Name:
+                strong.pull-right
+                  = @reservation.user.name.present? ? @reservation.user.name : 'Not Specified.'
+              li
+                | Size:
+                strong.pull-right
+                  = "#{@reservation.number_of_people} Persons"
+              - if @reservation.confirmed
+                = link_to "Send 'Your table is ready'", activate_reservation_path(@reservation), class: 'button btn btn-lg btn-block button' 
+              - else
+                .form
+                  .row
+                    = form_for @reservation do |f|
+
+
+                      .btn-group data-toggle="buttons-radio"
+                        .form-group
+                          button.btn.form-control.wait_time type="button"  IMMEDIATE SEATING
+                          
+                        .form-group.col-xs-4
+                          button.btn.form-control.wait_time type="button"  15
+                          
+                        .form-group.col-xs-4
+                          button.btn.form-control.wait_time type="button"  30
+                          
+                        .form-group.col-xs-4
+                          button.btn.form-control.wait_time type="button"  45
+                       
+
+                        = f.hidden_field :confirmed, :value => true
+                        = f.text_field :wait_time, placeholder: 'CUSTOM', class: 'form-control wait_time_field', required: 'required'
+                        br
+                      .form-group
+                        = submit_tag 'SEND CONFIRMATION', class: 'button btn btn-lg btn-block button'
+
+- else
+  .container.min-height
+    .row
+      .col-sm-4.col-sm-offset-4
+        section.listing.singlelist
+          header
+            .media
+              .media-left
+                a href="#"
+                  = image_tag 'list_logo.png'
+              .media-body
+                = link_to 'back', restaurants_path, class: 'pull-right btn smallbtn'
+          .loader.text-center
+
+            p The host will text you with a confirmation and wait time soon. Thank you
+              for using Seated App
+
+          

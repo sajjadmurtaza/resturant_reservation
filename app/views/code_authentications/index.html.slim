@@ -1,0 +1,18 @@
+.container
+  .row
+    .col-sm-4.col-sm-offset-4
+      .logo.text-center
+        h1 Welcome to
+        a href="#"
+          = image_tag 'logo.png', alt: 'logo', class: 'img-responsive'
+
+      .form
+        p
+          | You will receive a Verification Code via Text Message
+          span
+            = link_to ' (Click here to resend code)', resend_code_code_authentications_path,class: 'red-link',remote:true
+        = form_tag code_authentications_path, :method => :get do
+          .form-group
+            = text_field_tag :code, params[:code], class: 'form-control', placeholder: 'Enter Verification Code Here', required: 'required'
+          .form-group
+            = submit_tag 'Authenticate', class: 'button btn btn-lg btn-block button'

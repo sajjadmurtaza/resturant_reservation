@@ -1,0 +1,4 @@
+$('#reservations').html("<%= j (render 'reservations') %>");
+$('.localtime').each(function(i, v) {
+    $(v).html(getLocalTime($(v).attr('data-date')));
+});

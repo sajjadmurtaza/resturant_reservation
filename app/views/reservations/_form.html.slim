@@ -1,0 +1,51 @@
+.container.min-height
+  .row
+    .col-sm-4.col-sm-offset-4
+      section.listing.singlelist
+        header
+          .media
+            .media-left
+              a href="#"
+                = image_tag 'list_logo.png'
+            .media-body
+              = link_to 'back', restaurants_path, class: 'pull-right btn smallbtn'
+        article
+          ul
+            li
+              .media
+                .media-left
+                  a href="#"
+                    = image_tag(@restaurant.image.url)
+                .media-body
+                  h4.media-heading
+                    = @restaurant.name
+                  p
+                    =@restaurant.address
+                  p
+                    =@restaurant.zip_code.code
+        .form
+          p
+          = form_for [@restaurant, @reservation] do |f|
+            - if @reservation.errors.any?
+              #error_explanation
+                h2 = "#{pluralize(@reservation.errors.count, "error")} prohibited this reservation from being saved:"
+                ul
+                  - @reservation.errors.full_messages.each do |message|
+                    li = message
+
+            .form-group
+              = f.hidden_field :restaurant_id, value: @restaurant.id
+            .form-group
+              = f.hidden_field :user_id, value: current_user.id
+            .form-group
+              = f.text_field :party_name, {class: 'form-control', placeholder: 'Party Name', required: 'required'}
+            .form-group
+              = f.text_field :number_of_people, class: 'form-control', placeholder: 'Number of Guests', required: 'required'
+            /.form-group
+            /  = f.text_field :estimated_time,{class: 'form-control datetimepicker', placeholder: 'Party Date', required: 'required'}
+            /.form-group
+            /  = f.text_field :party_time, {class: 'form-control timepicker', placeholder: 'Party Time', required: 'required'}
+            .form-group
+              = f.submit 'BOOK MY TABLE', class: 'button btn btn-lg btn-block button'
+
+

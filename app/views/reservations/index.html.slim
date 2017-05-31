@@ -1,0 +1,66 @@
+- if params[:unauthorize]
+  h3 You are not authorize to cancel.
+- else
+  .container
+    .row
+      .col-sm-4.col-sm-offset-4
+        section.reciept.listing.time
+          header
+            .media
+              .media-left
+                = image_tag 'list_logo.png'
+              .media-body.text-center
+                span.clock
+                a.pull-right.btn.smallbtn href="/reservations"  back
+
+  .min-height
+    - if current_admin_user.present?
+      #custom
+        = form_tag reservations_path,id: 'reservation', :method => :get do
+          = hidden_field_tag :est,nil
+          .col-lg-3
+            .form-group
+              label Restaurant
+              = select_tag(:restaurant_id, options_for_select([['All',nil]]+Restaurant.all.collect {|restaurant| [ restaurant.name, restaurant.id ]},selected: params[:restaurant_id]), class: 'form-control form-dropdown')
+          .col-lg-2
+            .form-group
+              label Month
+              = select_tag(:month, options_for_select(month_array, params[:month]),prompt: "Select", class: 'form-dropdown form-control month')
+
+          .col-lg-2
+            .form-group
+              label Year
+              = select_tag(:year, options_for_select(year_array, params[:year]),prompt: "Select", class: 'form-dropdown form-control month')
+
+          .col-lg-3
+            label &nbsp
+            .form-group
+              = submit_tag "Search",  class: 'smallbtn btn'
+          .col-lg-2
+            .form-group
+              = link_to "CSV Export", "javascript:void(0)", onclick: "export_reservations()",class: 'pull-right smallbtn btn'
+
+
+
+
+    .div-table
+      table.table
+        thead
+          tr
+            th Status
+            th Party name
+            th Number of people
+            th Est. Seating Time
+            - if current_admin_user.present?
+              th Date
+
+
+
+        tbody#reservations
+          = render 'reservations'
+
+      .pagination
+        = paginate @reservations
+
+  - if current_restaurant
+    = javascript_include_tag 'auto_reload'

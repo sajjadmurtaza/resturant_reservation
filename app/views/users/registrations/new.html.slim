@@ -1,0 +1,23 @@
+.container.min-height
+  .row
+    .col-sm-4.col-sm-offset-4
+      .logo.text-center
+        h1 Welcome to
+        a href="#"
+          = image_tag 'logo.png', alt: 'logo', class: 'img-responsive'
+
+      .form
+        p
+          | Enter User Information
+
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+
+          .form-group
+            = f.text_field :phone, class: 'form-control', placeholder: 'Phone i.e 732-278-5218', required: 'required'
+
+          .form-group
+            = text_field_tag :code, nil , class: 'form-control', placeholder: 'Zip Code', required: 'required'
+
+          .form-group
+            = f.submit 'Enter', class: 'button btn btn-lg btn-block button'

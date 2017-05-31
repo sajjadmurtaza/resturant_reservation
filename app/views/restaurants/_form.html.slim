@@ -1,0 +1,33 @@
+= form_for @restaurant  do |f|
+  - if @restaurant.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@restaurant.errors.count, "error")} prohibited this reservation from being saved:"
+      ul
+        - @restaurant.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    = f.text_field :name, class: 'form-control', placeholder: 'Name', required: 'required'
+  .form-group
+    = f.text_field :phone, class: 'form-control', placeholder: 'Phone # i.e 732-278-5218', required: 'required'
+  .form-group
+    = text_field_tag :code, @restaurant.zip_code.try(:code), class: 'form-control', placeholder: 'Zip Code', required: 'required'
+  .form-group
+    = f.email_field :email, class: 'form-control', placeholder: 'Email', required: 'required'
+  -if @restaurant.new_record?  
+    .form-group
+      = f.password_field :password, class: 'form-control', placeholder: 'Password', required: 'required'
+    .form-group
+      = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password Confirmation', required: 'required'
+  .form-group
+    = f.text_field :address, class: 'form-control', placeholder: 'Address', required: 'required'
+  .form-group
+    = text_field_tag :image,nil, class: 'form-control uploadField', placeholder: 'Upload Image'
+    = f.file_field :image, class: 'hidden'
+  /.form-group
+  /  = f.datetime_select :party_time
+  .form-group
+    = f.submit "#{@restaurant.new_record? ? 'Register Restaurant' : 'Update Profile'}", class: 'button btn btn-lg btn-block button'
+
+
+= javascript_include_tag 'file_upload'

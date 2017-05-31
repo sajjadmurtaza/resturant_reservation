@@ -1,0 +1,31 @@
+
+- @restaurants.each do |restaurant|
+  li
+    = link_to new_restaurant_reservation_path(restaurant) do
+      .media
+        .media-left
+          =image_tag(restaurant.image_url(:thumb), class: 'res-img')
+        .media-body
+          h4.media-heading = restaurant.name
+          p
+            = restaurant.address
+          p
+            = restaurant.zip_code.code
+
+#ChangeZipModal.modal
+  .modal-header
+    button.close aria-label="Close" data-dismiss="modal" type="button"
+      span aria-hidden="true"  &times;
+    h4#gridSystemModalLabel.modal-title Change Zip Code
+  .container
+    .row
+      .col-sm-4
+        section.reciept.listing 
+          .form
+            = form_tag restaurants_path, :method => :get do
+              .form-group.col-md-8.col-md-offset-2
+                = text_field_tag :zip_code, nil,class: 'form-control form-dropdown', placeholder: 'Zip Code', required: 'required'
+              .form-group.col-md-8.col-md-offset-2  
+                = submit_tag 'Change', class: 'button btn btn-lg btn-block button'
+     
+

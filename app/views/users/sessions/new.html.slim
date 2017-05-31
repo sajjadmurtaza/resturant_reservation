@@ -1,0 +1,29 @@
+.container
+  .row
+    .col-sm-4.col-sm-offset-4
+      .logo.text-center
+        h1 Welcome to
+        a href="#"
+          = image_tag 'logo.png', alt: 'logo', class: 'img-responsive'
+
+      .form
+        p Please Enter Details
+
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .form-group
+            = f.text_field :phone, autofocus: true, class: 'form-control', placeholder: 'Phone #'
+
+
+
+          .form-group
+            = f.submit 'Log in', class: 'button btn btn-lg btn-block button'
+
+      = render 'users/shared/links'
+
+= content_for :login_links do
+    .media
+      .media-body
+        .btn-group
+          = link_to 'Login Admin', new_admin_user_session_path, class: 'pull-left btn smallbtn'
+        .btn-group
+          = link_to 'Login Restaurant', new_restaurant_session_path, class: 'pull-left btn smallbtn'

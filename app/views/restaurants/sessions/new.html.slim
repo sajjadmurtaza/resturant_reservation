@@ -1,0 +1,39 @@
+.container.min-height
+  .row
+    .col-sm-4.col-sm-offset-4
+      .logo.text-center
+        h1 Welcome to
+        a href="#"
+          = image_tag 'logo.png', alt: 'logo', class: 'img-responsive'
+
+      .form
+        p Please Enter Details
+
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .form-group
+            = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email', required: 'required'
+
+          .form-group
+            = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password', required: 'required'
+
+
+          - if devise_mapping.rememberable?
+            .form-group
+              .radio
+                = f.check_box :remember_me, input_html: {id: 'optionsRadios1'}
+                = f.label :remember_me
+
+
+          .form-group
+            = f.submit 'Log in', class: 'button btn btn-lg btn-block button'
+
+      /= render 'users/shared/links'
+
+= content_for :login_links do
+  .media
+    .media-body
+      .btn-group
+        = link_to 'Login User', new_user_session_path, class: 'pull-left btn smallbtn'
+      .btn-group
+
+        = link_to 'Login Admin', new_admin_user_session_path, class: 'pull-left btn smallbtn'

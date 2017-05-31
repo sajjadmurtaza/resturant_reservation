@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  party_name: MyString
+  number_of_people: MyString
+  estimated_time: 2015-03-11 11:36:44
+  party_time: 2015-03-11 11:36:44
+
+two:
+  user_id: MyString
+  party_name: MyString
+  number_of_people: MyString
+  estimated_time: 2015-03-11 11:36:44
+  party_time: 2015-03-11 11:36:44

@@ -1,0 +1,61 @@
+- if current_user.present?
+  .container.min-height
+    .row
+      .col-sm-4.col-sm-offset-4
+        section.listing
+          header
+            .media
+              .media-left
+                a href="#"
+                  = image_tag 'list_logo.png', alt: 'logo'
+              .media-body
+                h4.media-heading
+                  | Restaurants near: #{@zip_code.code} 
+                  a href="javascript:void(0)" class='red-link' data-toggle="modal" data-target="#ChangeZipModal" change
+                 
+          - if @restaurants.empty?
+              h4 Currently no restaurants are available near:  #{@zip_code.code}         
+          article
+            ul#search
+              = render 'user_restaurants'
+
+- else
+  .container
+    .row
+      .col-sm-4.col-sm-offset-4
+        section.reciept.listing
+          header
+            .media
+              .media-left
+                = image_tag 'list_logo.png'
+              .media-body
+                = link_to 'back', url_for(:back), class: 'pull-right btn smallbtn'
+  .media
+    .div-table.min-height
+      = link_to 'New Restaurant', new_restaurant_path, class: 'pull-right btn smallbtn'
+      table.table
+        thead
+          tr
+            th Restaurant Name
+            th Zip Code
+            th Phone
+            th Email
+            th Address
+            th Reservations
+            th
+            
+
+        tbody
+          - @restaurants.each do |restaurant|
+            tr class="#{cycle(:success, :warning)}"
+              td = link_to restaurant.name, restaurant
+              td = restaurant.zip_code.code
+              td = restaurant.phone
+              td = restaurant.email
+              td = restaurant.address
+              td = restaurant.reservations.count
+              td
+                =link_to restaurant_path(restaurant),method: :delete,data: {confirm: 'Are you sure?'}, class: 'btn deleteBtn' do
+                  span
+                    i.glyphicon.glyphicon-trash
+              

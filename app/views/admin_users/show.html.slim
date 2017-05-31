@@ -1,0 +1,48 @@
+.container.min-height
+  .row
+    .col-sm-4.col-sm-offset-4
+      section.reciept.listing
+        header
+          .media
+            .media-left
+              = image_tag 'list_logo.png'
+            .media-body
+              = link_to 'back', url_for(:back), class: 'pull-right btn smallbtn'
+        article.congo
+          ul
+            li
+              .media
+                .media-right.pull-right
+                  /= image_tag 'list_img1.png'
+                .media-body
+                  h4.media-heading PROFILE
+                  p Welcome to seated.
+        section.order_info
+          h3.text-center
+          ul
+            li
+              | Name:
+              strong.pull-right
+                = @admin_user.name.present? ? @admin_user.name : 'Not Specified'
+            li
+              | Email:
+              strong.pull-right
+                = @admin_user.email
+            li
+              | Phone:
+              strong.pull-right
+                = @admin_user.phone.present? ? @admin_user.name : 'Not Specified'
+            li
+              | Sign In Count  :
+              strong.pull-right
+                = @admin_user.sign_in_count
+
+        = link_to 'EDIT YOUR PROFILE', '#', class: 'button btn btn-lg btn-block button user-edit-profile'
+
+
+#UserFormModal.modal
+  .modal-header
+    button.close aria-label="Close" data-dismiss="modal" type="button"
+      span aria-hidden="true"  &times;
+    h4#gridSystemModalLabel.modal-title My Profile
+  = render 'form'

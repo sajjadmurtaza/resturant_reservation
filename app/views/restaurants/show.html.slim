@@ -1,0 +1,51 @@
+.container.min-height
+  .row
+    .col-sm-4.col-sm-offset-4
+      section.reciept.listing
+        header
+          .media
+            .media-left
+              = image_tag 'list_logo.png'
+            .media-body
+              = link_to 'back', url_for(:back), class: 'pull-right btn smallbtn'
+        article.congo
+          ul
+            li
+              .media
+                .media-right.pull-right
+                  = image_tag @restaurant.image.url
+                .media-body
+                  h4.media-heading PROFILE
+                  p Welcome to seated.
+        section.order_info
+          h3.text-center
+          ul
+            li
+              | Name:
+              strong.pull-right
+                = @restaurant.name
+            li
+              | Email:
+              strong.pull-right
+                = @restaurant.email
+            li
+              | Phone:
+              strong.pull-right
+                = @restaurant.phone
+            li
+              | Sign In Count  :
+              strong.pull-right
+                = @restaurant.sign_in_count
+        = link_to 'EDIT Restaurant', '#', class: 'button btn btn-lg btn-block button restaurant-edit-profile'
+
+#RestaurantFormModal.modal
+  .modal-header
+    button.close aria-label="Close" data-dismiss="modal" type="button"
+      span aria-hidden="true"  &times;
+    h4#gridSystemModalLabel.modal-title Restaurant Profile
+  .container
+    .row
+      .col-sm-4
+        section.reciept.listing 
+          .form
+            = render 'form'

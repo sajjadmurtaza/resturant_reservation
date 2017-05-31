@@ -1,0 +1,13 @@
+- @reservations.each do |reservation|
+  tr class="#{cycle(:success, :warning)}" onclick="window.location.href = '#{reservation_path(reservation)}'" 
+    td
+      = reservation.status_string
+      - if reservation.status_string == "New"
+        span.new = image_tag('new.png', width: 40, height: 40)
+    td = reservation.party_name
+    td = reservation.number_of_people
+    td.localtime data-date="#{reservation.est_seating_time}"
+    - if current_admin_user.present?
+      td = reservation.created_at.strftime("%m/%d/%Y")
+   
+  
